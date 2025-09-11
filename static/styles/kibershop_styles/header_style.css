@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+}
+
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    background-size: cover;
+    background-position: center;
+    height: 30vw;
+     /*width: 100vw;*/
+}
+
+button {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#kiberons {
+    font-family: 'franklin_gothic_mediumregular';
+    font-size: 3vw;
+    color: white;
+    border-bottom: solid;
+    border-width: 0.4vw;
+    margin-right: 0.2vw;
+}
+
+#headerLine{
+    position: fixed;
+    background-color: #71D7D9;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+
+#headerButtons {
+    width: 100vw;
+    display: flex;
+    justify-content: right;
+    align-items: center; 
+}
+
+#logoImg {
+    width: 15vw;
+    height: 7.5vw;
+    margin: 1vw;
+}
+
+#profileImg {
+    margin-right: 1vw;
+}
+
+.iconImg {
+    width: 7vw;
+    height: 7vw;
+    margin: 1vw;
+}
+
+#toCatalog {
+    color: white;
+    font-size: 4vw;
+    margin-right: 1vw;
+    margin-left: 1vw;
+    text-decoration: underline;
+}

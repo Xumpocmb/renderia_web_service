@@ -1,0 +1,28 @@
+#warning {
+  overflow: hidden;
+  width: 88vw;
+  margin-top: 0vw;
+  margin-bottom: -3vw;
+}
+
+.warningText {
+  font-size: 4vw;
+  text-align: center;
+  white-space: nowrap;
+  animation: text 15s infinite linear;
+  /* overflow: hidden; */
+  /* margin: 0; */
+  margin-bottom: 0vw;
+  padding-left: 100vw;
+  padding-right: 250vw;
+}
+
+@keyframes text {
+  0%{
+    transform: translate(0, 0);
+  }
+
+  100%{
+    transform: translate(-100%, 0);
+  }
+}

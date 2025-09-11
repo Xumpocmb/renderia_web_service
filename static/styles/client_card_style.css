@@ -1,0 +1,114 @@
+@font-face {
+    font-family: 'pf_beausans_prolight';
+    src: url('/static/fonts/PFBeauSansPro-Light.ttf');
+url('/static/fonts/PFBeauSansPro-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'franklin_gothic_mediumregular';
+    src: url('/static/fonts/Franklin_Gothic_Medium.ttf');
+url('/static/fonts/Franklin_Gothic_Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html {
+    width: 100%;
+    /*height: 200vh;*/
+    font-family: 'pf_beausans_prolight';
+    font-size: 4vw;
+    overflow-x: hidden;
+    /* background-color: #ffff; */
+}
+
+
+body {
+    font-family: 'pf_beausans_prolight';
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 1vw;
+    /* overflow: hidden; */
+}
+
+span {
+    background-color: #fff;
+    padding: 3vw;
+    border-radius: 2vw;
+    display: flex;
+    max-height: 50vw;
+    font-size: 4vw;
+    overflow: auto;
+    scroll-snap-type: y mandatory;
+    border: 0.5vw solid #F6C90E;
+}
+
+p {
+    font-size: 4vw;
+    font-family: 'franklin_gothic_mediumregular';
+}
+
+a {
+    background-color: #F6C90E;
+    color: #ffffff;
+    border-radius: 5vw;
+    padding: 1.0vh;
+    width: 40vw;
+    text-decoration: none;
+    font-size: 5.5vw;
+    border: none;
+    text-align: center;
+}
+
+
+#main {
+    padding: 2vw;
+}
+
+
+#profileImg {
+    width: 45vw;
+    height: 45vw;
+    margin-bottom: -5vw;
+}
+
+
+#walletImg {
+    width: 5vw;
+    height: 5vw;
+    margin-right: 3vw;
+}
+
+#userInfo {
+    display: flex;
+    flex-direction: column;
+    /* margin-left: 20px; */
+    color: #000000;
+    text-align: right;
+}
+
+#infoWithImage {
+    display: flex;
+    width: 100%;
+    align-items: end;
+    margin-bottom: 5vw;
+    justify-content: space-between;
+}
+
+#extraInfo {
+    padding-top: 3vw;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: inherit;
+}

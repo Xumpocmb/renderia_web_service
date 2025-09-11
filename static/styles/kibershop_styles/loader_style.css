@@ -1,0 +1,19 @@
+#loader {
+    margin: 15vw;
+    content: "";
+    width: 10vw;
+    height: 10vw;
+    border: 1vw solid #312f32;
+    border-top-color: transparent;
+    border-radius: 50vw;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

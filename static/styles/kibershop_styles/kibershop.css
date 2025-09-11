@@ -1,0 +1,322 @@
+@font-face {
+    font-family: 'pf_beausans_prolight';
+    src: url('/static/fonts/PFBeauSansPro-Light.ttf');
+         url('/static/fonts/PFBeauSansPro-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'franklin_gothic_mediumregular';
+    src: url('/static/fonts/Franklin_Gothic_Medium.ttf');
+         url('/static/fonts/Franklin_Gothic_Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: white;
+    font-family: 'pf_beausans_prolight', sans-serif;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-family: 'franklin_gothic_mediumregular', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin: 0;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-size: cover;
+    background-position: center;
+    padding: 1vw 0;
+    height: 30vw;
+}
+
+
+
+#headerLine {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #71D7D9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.left_section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#logoImg {
+    width: 120px;
+    height: auto;
+}
+
+#toCatalog {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#toCatalog:hover {
+    color: #FFCD26;
+}
+
+.right_section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.iconImg {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+
+.iconImg:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+#kibershopText {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2vw 0 0 5vw;
+}
+
+#kibershopText h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.productListSection {
+    margin-bottom: 5vw;
+    /* padding: 2vw; */
+}
+
+.sectionTitle {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2vw;
+}
+
+.sectionTitle span {
+    background: linear-gradient(146deg, #05b8be7d 0%, #1186957b 50%, #1c556e72 100%);
+    border-radius: 10px 0 0 10px;
+    padding: 1vw 2vw;
+    font-size: clamp(1rem, 4.5vw, 2rem);
+    font-family: 'franklin_gothic_mediumregular', sans-serif;
+    text-align: right;
+}
+
+.productsSection {
+    margin-bottom: 20px;
+}
+
+.productsRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2vw;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.productCard {
+    background-color: #05b8be65;
+    border-radius: 10px;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.productImg {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    margin-bottom: 1vw;
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.productName {
+    font-family: 'franklin_gothic_mediumregular', sans-serif;
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    color: white;
+    border-bottom: 2px solid white;
+    padding-bottom: 0.5vw;
+    margin-bottom: 1vw;
+}
+
+.productPrice {
+    font-family: 'franklin_gothic_mediumregular', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    color: #92241F;
+    margin-top: 1vw;
+}
+
+.cartButton {
+    background-color: #05B9BE;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vw;
+}
+
+.signButton {
+    background-color: #FFFF;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: black;
+    margin: 0.5vw;
+}
+
+.buttonsRowSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vw;
+}
+
+footer {
+    background-size: cover;
+    background-position: center;
+    height: 32vw;
+    padding: 2vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+#companyInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1vw;
+}
+
+#companyInfo i {
+    font-size: clamp(0.8rem, 1vw, 1.2rem);
+    color: white;
+}
+
+
+
+
+#fixedCartSection {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#productInCartCount {
+    font-family: 'franklin_gothic_mediumregular', sans-serif;
+    position: relative;
+    top: 20px;
+    left: 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #92241F;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+
+#fixedCartButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #FFCD26;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+#fixedCartButtonImg {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #toCatalog {
+        margin-left: 0;
+    }
+
+    .sectionTitle span {
+        font-size: clamp(1rem, 4vw, 1.5rem);
+        padding: 0.5vw 1vw;
+    }
+
+    .productsRow {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .productCard {
+        padding: 1vw;
+    }
+
+}

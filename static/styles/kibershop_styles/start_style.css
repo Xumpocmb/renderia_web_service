@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'pf_beausans_prolight';
+    src: url('/static/fonts/PFBeauSansPro-Light.ttf');
+         url('/static/fonts/PFBeauSansPro-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'franklin_gothic_mediumregular';
+    src: url('/static/fonts/Franklin_Gothic_Medium.ttf');
+         url('/static/fonts/Franklin_Gothic_Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    font-family: 'franklin_gothic_mediumregular';
+    font-size: 10.8vw;
+    background-color: #8cd1d3;
+    overflow-x: hidden;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7vw;
+}
+
+/* body {
+    background: #fff;
+} */
+
+img {
+    width: 85vw;
+    height: 100vw;
+    /* margin-top: 1vw; */
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    background-color: #F6C90E;
+    color: #ffffff;
+    border-radius: 15vw;
+    padding: 3.3vw;
+    text-decoration: none;
+    font-size: 5vw;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'pf_beausans_prolight';
+    margin-top: -1vw;
+}
+
+#text {
+    font-size: 4.3vw;
+    font-family: 'pf_beausans_prolight';
+}

@@ -1,0 +1,142 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+# Исключаем файлы миграций, но сохраняем файлы __init__.py
+*/migrations/*
+!*/migrations/__init__.py
+
+# Старый вариант (закомментирован)
+# Поскольку вы создали папки миграций с файлами __init__.py, лучше не исключать их
+# Закомментируем эти строки, чтобы миграции отслеживались Git
+# /*/migrations/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# PyCharm
+.idea/
+.idea/*
+.idea/*.xml
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Статические файлы, которые должны быть исключены
+/static/images/goods/
+/static/img/
+/static/video/
+/static/admin/
+/static/rest_framework/
+/static/fonts/
+/static/fonts/*
+
+# Медиа файлы
+/media/
+
+# Docker
+/docker.env
+
+# Fixtures
+/fixtures/
+
+# Прочие файлы
+info.txt
+/*.txt
+/.pylintrc
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Исключаем все JSON файлы, кроме необходимых
+# *.json
+# !package.json
+# !package-lock.json
+
+
+
+*.json
+
+# Исключаем файлы миграций
+**/migrations/*.py
+!**/migrations/__init__.py
+
+
+secrets

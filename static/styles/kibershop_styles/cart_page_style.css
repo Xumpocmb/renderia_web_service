@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'pf_beausans_prolight';
+    src: url('/static/fonts/PFBeauSansPro-Light.ttf');
+         url('/static/fonts/PFBeauSansPro-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'franklin_gothic_mediumregular';
+    src: url('/static/fonts/Franklin_Gothic_Medium.ttf');
+         url('/static/fonts/Franklin_Gothic_Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    background-color: white;
+    font-family: 'pf_beausans_prolight';
+    overflow-x: hidden;
+}
+
+body {
+    margin-bottom: 40vw;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+#titleSection {
+    width: inherit;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10vw;
+}
+
+
+#titleText {
+    font-size: 7vw;
+    font-family: 'franklin_gothic_mediumregular';
+    /* margin: 2vw; */
+    border-bottom: 0.5vw solid black;
+    width: 40vw;
+    text-align: right;
+    padding-right: 20vw;
+}
+

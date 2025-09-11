@@ -1,0 +1,7 @@
+<section>
+    {% if messages %}
+    	{% for message in messages %}
+    		<p id="errorText">{{ message }}</p>
+    	{% endfor %}
+    {% endif %}
+</section>

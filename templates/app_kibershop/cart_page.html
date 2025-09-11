@@ -1,0 +1,76 @@
+{% extends 'app_kibershop/base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/kibershop_styles/order_style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/kibershop_styles/cart_page_style.css' %}">
+
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+<body>
+    <section id="titleSection">
+        <p id="titleText">Корзина</p>
+    </section>
+    {% include 'app_kibershop/notifications.html' %}
+    <section id="orderProducts">
+        {% for cart in carts %}
+        <div class="orderProductCard">
+            <img src="{{ cart.product.image.url }}" class="orderProductImg" alt="item_image">
+            <section class="buttonsRowSection">
+                <a href="{% url 'app_kibershop:cart_minus' cart.id %}" class="signButton">-</a>
+                <p class="productCount">{{ cart.quantity }}</p>
+                <a href="{% url 'app_kibershop:cart_plus' cart.id %}" class="signButton">+</a>
+            </section>
+            <section class="orderSection">
+                <p class="orderProductPrice"><b>{{ cart.cart_item_price }}К</b></p>
+            </section>
+            <section class="removeButtonSection">
+                <a href="{% url 'app_kibershop:remove_from_cart' cart.id %}"><img
+                        src="{% static 'img/kibershop/remove.svg' %}" class="removeButton"></a>
+            </section>
+        </div>
+        {% endfor %}
+    </section>
+    {% if carts %}
+    <section id="fullOrderInfoSection">
+        <div id="fullOrderInfo">
+            <p id="orderProductsCount">Товары: <b>{{ carts.total_quantity }}</b> шт.</p>
+            <p id="orderKiberonsCount">Итого: <b>{{ carts.total_sum }}</b> К</p>
+        </div>
+        <form id="orderForm" action="{% url 'app_kibershop:make_order' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" id="fullOrderButton" disabled><img src="{% static 'img/kibershop/money.svg' %}"
+                    id="fullOrderButtonImg">Предзаказ</button>
+        </form>
+
+    </section>
+    {% else %}
+    <section id="fullOrderInfoSection">
+        <div id="fullOrderInfo">
+            <p id="orderProductsCount">Корзина пуста</p>
+        </div>
+
+    </section>
+    {% endif %}
+    <script>
+        function changeButtonText() {
+            const button = document.getElementById("fullOrderButton");
+            button.innerText = "Формируем заказ...";
+            button.disabled = true;
+            let formElement = document.getElementById("orderForm");
+            formElement.submit();
+        }
+    </script>
+</body>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,133 @@
+.orderProductCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    padding: 1vw;
+    padding-top: 3vw;
+    padding-bottom: 3vw;
+    background-color: #ffca1c4a;
+    border-radius: 1vw;
+    height: 15vw;
+    margin-top: 8vw;
+}
+
+
+.orderProductImg {
+    height: 25vw;
+}
+
+.orderProductName {
+    font-size: 4vw;
+}
+
+.orderProductPrice {
+    font-size: 4.5vw;
+    margin-bottom: 0;
+    margin-top: 0;
+    color: #92241F;
+}
+
+#errorText {
+    font-size: 4.5vw;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 5vw;
+    color: #92241F;
+}
+
+.orderSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderButton {
+    background-color: #92241F;
+    color: white;
+    font-size: 4vw;
+    font-family: 'franklin_gothic_mediumregular';
+    padding: 2vw;
+    border-radius: 10vw;
+}
+
+.removeButton {
+    height: 6vw;
+    margin-top: -3vw;
+    margin-right: -1vw;
+}
+
+
+.removeButtonSection {
+    height: inherit;
+    justify-content: start;
+}
+
+.orderProducts {
+    padding-bottom: 100vw;
+}
+
+#fullOrderInfoSection {
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vw;
+    margin-top: 10vw;
+}
+
+#fullOrderInfo {
+    border: 0.5vw solid #0000002e;
+    border-radius: 1vw;
+    padding: 5vw;
+    font-size: 6vw;
+}
+
+#fullOrderButton {
+    background-color: #92241F;
+    color: white;
+    font-size: 4vw;
+    font-family: 'franklin_gothic_mediumregular';
+    padding: 2vw;
+    border-radius: 10vw;
+    height: fit-content;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#fullOrderButtonImg {
+    margin: 1vw;
+    height: 5vw;
+}
+
+
+.buttonsRowSection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: -3vw;
+}
+
+.signButton {
+    background-color: #FFFF;
+    border-radius: 10vw;
+    height: 7vw;
+    width: 7vw;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.8vw;
+    font-size: 4vw;
+    margin: 1vw;
+    color: rgb(0, 0, 0);
+}
+
+.productCount {
+    font-size: 5vw;
+}

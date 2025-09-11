@@ -1,0 +1,69 @@
+@font-face {
+    font-family: 'pf_beausans_prolight';
+    src: url('/static/fonts/PFBeauSansPro-Light.ttf');
+         url('/static/fonts/PFBeauSansPro-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'franklin_gothic_mediumregular';
+    src: url('/static/fonts/Franklin_Gothic_Medium.ttf');
+         url('/static/fonts/Franklin_Gothic_Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    font-family: 'pf_beausans_prolight';
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'franklin_gothic_mediumregular';
+    background: #fff;
+}
+
+form {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10vw;
+}
+
+select {
+    padding: 1vw;
+    font-size: 6vw;
+    border: 0.5vw solid #71d7d95a;
+    border-radius: 2vw;
+    max-width: 80vw;
+}
+
+option {
+    margin: 2vw;
+    text-align: center;
+    padding: 1vw;
+}
+
+button {
+    background-color: #71D7D9;
+    color: #ffffff;
+    border-radius: 2vw;
+    padding: 2vw;
+    font-size: 4vw;
+    font-family: 'franklin_gothic_mediumregular';
+    margin: 2vw;
+    border: none;
+    cursor: pointer;
+}
+
+label {
+    font-size: 4vw;
+    text-align: center;
+    width: 90vw;
+}

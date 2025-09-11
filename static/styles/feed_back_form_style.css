@@ -1,0 +1,73 @@
+@font-face {
+    font-family: 'pf_beausans_prolight';
+    src: url('/static/fonts/PFBeauSansPro-Light.ttf');
+         url('/static/fonts/PFBeauSansPro-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'franklin_gothic_mediumregular';
+    src: url('/static/fonts/Franklin_Gothic_Medium.ttf');
+         url('/static/fonts/Franklin_Gothic_Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+button {
+    background-color: #F6C90E;
+    color: #ffffff;
+    border-radius: 4vw;
+    padding: 2vw;
+    text-decoration: none;
+    font-size: 4.5vw;
+    border: none
+}
+
+i {
+    font-size: 2.8vw;
+    background-color: #fff;
+}
+
+
+textarea {
+    font-size: 5vw;
+    border: 0.5vw solid #F6C90E;
+    margin-bottom: 2vw;
+    /* margin-top: 1vw; */
+    border-radius: 2vw;
+    padding: 3vw;
+    /* margin-left: -1vw; */
+    width: inherit;
+}
+
+
+form {
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+    
+    /* padding: 4px; */
+}
+
+#sendButton {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#feedback {
+    margin-top: 3vw;
+    margin-bottom: 3vw;
+    
+}
+
+#forSendButton {
+    width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

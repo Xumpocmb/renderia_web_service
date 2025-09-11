@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Профиль пользователя на сайте">
+    <meta name="keywords" content="профиль пользователя, сайт, пользовательский профиль">
+    <title>Профиль</title>
+    <link href="https://fonts.googleapis.com/css2?family=Franklin+Gothic+Medium&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PF+Beau+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/client_card_style.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/kibershop_styles/running_line.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/feed_back_form_style.css' %}">
+</head>
+
+<body>
+<div id="mainDiv">
+    <div id="main">
+        <section id="infoWithImage">
+            <img src="{% static 'img/profile_image.png' %}" alt="Профиль пользователя" id="profileImg">
+            <section id="userInfo">
+                <section id="account">
+                    <img src="{% static 'img/wallet_img.png' %}" alt="Кошелек" id="walletImg">
+                    <b id="kiberons">{{ client.kiberons_count }} К</b>
+                </section>
+                <p id="fullname">{{ client.name }}</p>
+                <b id="dob">{{ client.dob }}</b>
+                <b id="location">{{ client.location_name }}</b>
+            </section>
+        </section>
+        
+        <section id="buttons">
+            <a href="{% url 'app_kibershop:catalog' %}" id="shopLink">KIBERshop</a>
+            <a href="{{ portfolio_link }}" id="portfolioLink" target="_blank">Портфолио</a>
+        </section>
+
+        <div id="warning">
+            <p class="warningText">
+                КИБЕРШОП ЗАКРЫТ! Ваш заказ вы получите на занятии в период с 25.05 по 31.05.
+            </p>
+        </div>
+
+        <section id="extraInfo">
+            <p>Тема следующего занятия:</p>
+            <span id="subject">{{ client.lesson_name }}</span>
+            <p>Обратная связь от тьютора:</p>
+            <span id="resume">
+                <div class="item" id="resumeInfo">{{ client.resume }}</div>
+            </span>
+        </section>
+
+        <section id="feedback">
+            <p id="message">Оставьте обратную связь по работе нашей КИБЕР-школы!</p>
+            <form method="post" id="feedbackForm" onsubmit="event.preventDefault(); submitReview()">
+                {% csrf_token %}
+                <input type="hidden" name="crm_id" value="{{ client.crm_id }}">
+                <input type="hidden" name="room_id" value="{{ client.room_id }}">
+                <input type="hidden" name="profile_id" value="{{ client.profile_id }}">
+                
+                <textarea placeholder="Введите ваш отзыв" id="feedbackInput" name="feedbackInput"></textarea>
+                <div id="forSendButton">
+                    <button type="submit" id="sendButton">Отправить</button>
+                </div>
+                
+            </form>
+        </section>
+    </div>
+</div>
+</body>
+
+
+<script>
+    function submitReview() {
+        let formData = new FormData(document.getElementById('feedbackForm'));
+        let button = document.getElementById('sendButton');
+
+        console.log('Button before change:', button.innerText);
+        button.innerText = 'Отправка...';
+        console.log('Button after change:', button.innerText);
+
+        fetch('{% url 'app_kiberclub:save_review_from_page' %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('message').innerText = data.message;
+                    button.innerText = 'Отправить';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                button.innerText = 'Отправить';
+            });
+    }
+</script>
+</html>
