@@ -11,31 +11,31 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = os.getenv("DEBUG") == "True"
 
-TELEGRAM_BOT_TOKEN = (
-    os.getenv("TELEGRAM_BOT_TOKEN_TEST") if DEBUG else os.getenv("TELEGRAM_BOT_TOKEN")
-)
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN_TEST") if DEBUG else os.getenv("TELEGRAM_BOT_TOKEN")
 
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://kiberonetgbot.online",
-    "https://93.85.88.72",
+    "https://renderia-bot.by",
+    "renderia-bot.by",
+    "5.44.44.159",
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://kiberonetgbot.online",
-    "https://93.85.88.72",
+    "https://renderia-bot.by",
+    "renderia-bot.by",
+    "5.44.44.159",
     "http://127.0.0.1",
     "http://localhost",
     "http://0.0.0.0",
 ]
 
 ALLOWED_HOSTS = [
-    "kiberonetgbot.online",
-    "https://kiberonetgbot.online",
-    'www.kiberonetgbot.online',
-    "93.85.88.72",
+    "https://renderia-bot.by",
+    "renderia-bot.by",
+    "5.44.44.159",
     "localhost",
     "127.0.0.1",
     "0.0.0.0",
@@ -58,8 +58,7 @@ INSTALLED_APPS = [
     "app_api",
     "app_kiberclub",
     "app_kibershop.apps.AppKibershopConfig",
-    
-    'corsheaders',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -70,10 +69,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    
-    
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "_web_service.urls"
