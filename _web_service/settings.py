@@ -16,17 +16,15 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN_TEST") if DEBUG else os.geten
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 CORS_ALLOWED_ORIGINS = [
     "https://renderia-bot.by",
-    "renderia-bot.by",
-    "5.44.44.159",
-    "localhost",
-    "127.0.0.1",
-    "0.0.0.0",
+    "http://5.44.44.159",
+    "http://localhost",
+    "http://127.0.0.1",
+    "http://0.0.0.0",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://renderia-bot.by",
-    "renderia-bot.by",
-    "5.44.44.159",
+    "http://5.44.44.159",
     "http://127.0.0.1",
     "http://localhost",
     "http://0.0.0.0",
@@ -34,7 +32,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 ALLOWED_HOSTS = [
     "https://renderia-bot.by",
-    "renderia-bot.by",
     "5.44.44.159",
     "localhost",
     "127.0.0.1",

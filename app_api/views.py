@@ -238,6 +238,7 @@ def get_clients_by_user(request, user_id: int):
 def create_or_update_clients_in_db_view(request) -> Response:
     """
     Создает, обновляет или удаляет клиентов в базе данных с учетом отношения М:М.
+    Если CRM возвращает пустой список, удаляются все клиенты пользователя.
     """
     try:
         user_id: int = request.data.get("user_id")
@@ -267,6 +268,60 @@ def create_or_update_clients_in_db_view(request) -> Response:
                 },
                 status=status.HTTP_404_NOT_FOUND,
             )
+
+        # Если CRM вернул пустой список, удаляем всех клиентов пользователя
+        if not crm_items:
+            logger.info(f"CRM вернул пустой список клиентов для user_id={user_id}. Удаляем все связи.")
+
+            # Получаем всех клиентов пользователя
+            user_clients = user.clients.all()
+            clients_count = user_clients.count()
+
+            if clients_count > 0:
+                # Удаляем все связи многие-ко-многим
+                user.clients.clear()
+                logger.info(f"Удалено {clients_count} связей с клиентами для пользователя {user_id}")
+            else:
+                logger.info(f"У пользователя {user_id} нет клиентов для удаления")
+
+            # Обновляем статус пользователя
+            update_bot_user_status(user)
+            logger.info(f"Статус пользователя обновлен: {user.status}")
+
+            return Response(
+                {
+                    "success": True,
+                    "message": "Все клиенты пользователя удалены (пустой ответ от CRM)",
+                    "deleted_clients": clients_count,
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        # Обрабатываем непустой список клиентов из CRM
+        crm_ids: set = {str(item["id"]) for item in crm_items}
+        logger.info(f"CRM IDs из запроса: {crm_ids}")
+
+        # Получаем текущих клиентов пользователя
+        existing_clients: QuerySet = user.clients.all()
+        existing_crm_ids: set = {client.crm_id for client in existing_clients if client.crm_id}
+        logger.info(f"Существующие CRM IDs: {existing_crm_ids}")
+
+        # Удаляем связи с клиентами, которых нет в новом ответе от CRM
+        crm_ids_to_remove: set = existing_crm_ids - crm_ids
+        removed_relations_count: int = 0
+
+        if crm_ids_to_remove:
+            logger.info(f"CRM IDs для удаления связей: {crm_ids_to_remove}")
+            clients_to_remove = Client.objects.filter(crm_id__in=crm_ids_to_remove)
+            for client in clients_to_remove:
+                user.clients.remove(client)
+                removed_relations_count += 1
+                logger.info(f"Удалена связь с клиентом: {client.crm_id}")
+            logger.info(f"Удалено связей с клиентами: {removed_relations_count}")
+
+        # Создание и обновление клиентов
+        created_count: int = 0
+        updated_count: int = 0
 
         for item in crm_items:
             crm_id = str(item["id"])
@@ -316,9 +371,16 @@ def create_or_update_clients_in_db_view(request) -> Response:
                     user.clients.add(client)
                     logger.info(f"Добавлена связь пользователь-клиент: {user.id} - {client.id}")
 
+                if created:
+                    created_count += 1
+                else:
+                    updated_count += 1
+
             except Exception as e:
                 logger.error(f"Ошибка при создании/обновлении клиента crm_id={crm_id}: {e}")
                 continue
+
+        logger.info(f"Итоги: создано={created_count}, обновлено={updated_count}, удалено связей={removed_relations_count}")
 
         # Обновляем статус пользователя
         update_bot_user_status(user)
@@ -328,6 +390,9 @@ def create_or_update_clients_in_db_view(request) -> Response:
             {
                 "success": True,
                 "message": "Клиенты успешно обновлены",
+                "created": created_count,
+                "updated": updated_count,
+                "removed_relations": removed_relations_count,
             },
             status=status.HTTP_200_OK,
         )
