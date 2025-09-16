@@ -271,28 +271,42 @@ def create_or_update_clients_in_db_view(request) -> Response:
 
         # Если CRM вернул пустой список, удаляем всех клиентов пользователя
         if not crm_items:
-            logger.info(f"CRM вернул пустой список клиентов для user_id={user_id}. Удаляем все связи.")
-
+            logger.info(f"CRM вернул пустой список клиентов для user_id={user_id}. Удаляем клиентов.")
+            
             # Получаем всех клиентов пользователя
             user_clients = user.clients.all()
             clients_count = user_clients.count()
-
+            deleted_clients_count = 0
+            
             if clients_count > 0:
-                # Удаляем все связи многие-ко-многим
-                user.clients.clear()
-                logger.info(f"Удалено {clients_count} связей с клиентами для пользователя {user_id}")
+                for client in user_clients:
+                    # Проверяем, связан ли клиент с другими пользователями
+                    other_users_count = client.users.exclude(id=user.id).count()
+                    
+                    if other_users_count == 0:
+                        # Клиент не связан с другими пользователями - удаляем полностью
+                        client.delete()
+                        deleted_clients_count += 1
+                        logger.info(f"Удален клиент: {client.crm_id} (без других связей)")
+                    else:
+                        # Клиент связан с другими пользователями - удаляем только связь
+                        user.clients.remove(client)
+                        logger.info(f"Удалена связь с клиентом: {client.crm_id} (есть другие пользователи: {other_users_count})")
+                
+                logger.info(f"Удалено клиентов: {deleted_clients_count}, удалено связей: {clients_count - deleted_clients_count}")
             else:
                 logger.info(f"У пользователя {user_id} нет клиентов для удаления")
-
+            
             # Обновляем статус пользователя
             update_bot_user_status(user)
             logger.info(f"Статус пользователя обновлен: {user.status}")
-
+            
             return Response(
                 {
                     "success": True,
-                    "message": "Все клиенты пользователя удалены (пустой ответ от CRM)",
-                    "deleted_clients": clients_count,
+                    "message": "Обработка пустого ответа от CRM завершена",
+                    "deleted_clients": deleted_clients_count,
+                    "removed_relations": clients_count - deleted_clients_count,
                 },
                 status=status.HTTP_200_OK,
             )
