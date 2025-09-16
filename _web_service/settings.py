@@ -32,6 +32,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 ALLOWED_HOSTS = [
     "https://renderia-bot.by",
+    "renderia-bot.by",
     "5.44.44.159",
     "localhost",
     "127.0.0.1",
