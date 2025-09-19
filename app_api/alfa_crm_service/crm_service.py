@@ -514,3 +514,19 @@ def get_all_clients(branch_id):
         page += 1
     
     logger.info(f"Завершено получение клиентов для филиала {branch_id}")
+
+
+def get_taught_trial_lesson(customer_id, branch_id):
+    url = f"https://{CRM_HOSTNAME}/v2api/{branch_id}/lesson/index"
+
+    data = {
+        "customer_id": customer_id,
+        "status": 3,  # 1 - запланирован урок, 2 - отменен, 3 - проведен
+        "lesson_type_id": 3  # 3 - пробник, 2 - групповой
+    }
+
+    # lessons = requests.post(url, json=data, headers=headers)
+    lessons_response = send_request_to_crm(url=url, data=data, params=None)
+
+    return lessons_response
+

@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Перейти в корень проекта
-cd /home/x93/x-code/kiberone_web_service || { echo "❌ Не удалось перейти в директорию проекта"; exit 1; }
-
+cd /home/x93/x-code/RENDERIA/renderia_web_service || { echo "❌ Не удалось перейти в директорию проекта"; exit 1; }
 # Проверяем, существует ли celery_app.py
 if [ ! -f "celery_app.py" ]; then
     echo "❌ Файл celery_app.py не найден в текущей директории"
@@ -10,13 +9,13 @@ if [ ! -f "celery_app.py" ]; then
 fi
 
 # Проверяем, существует ли виртуальное окружение
-if [ ! -d ".venv" ]; then
+if [ ! -d "venv" ]; then
     echo "❌ Виртуальное окружение 'venv' не найдено"
     exit 1
 fi
 
 # Активировать виртуальное окружение
-source .venv/bin/activate || { echo "❌ Не удалось активировать виртуальное окружение"; exit 1; }
+source venv/bin/activate || { echo "❌ Не удалось активировать виртуальное окружение"; exit 1; }
 
 # Создать папку для логов (если её нет)
 mkdir -p logs
