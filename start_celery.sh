@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Перейти в корень проекта
-cd /home/x93/x-code/RENDERIA/renderia_web_service || { echo "❌ Не удалось перейти в директорию проекта"; exit 1; }
+# Определяем директорию, в которой находится скрипт
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Перейти в корень проекта (директория скрипта)
+cd "$SCRIPT_DIR" || { echo "❌ Не удалось перейти в директорию проекта: $SCRIPT_DIR"; exit 1; }
+echo "✅ Рабочая директория: $(pwd)"
 # Проверяем, существует ли celery_app.py
 if [ ! -f "celery_app.py" ]; then
     echo "❌ Файл celery_app.py не найден в текущей директории"
