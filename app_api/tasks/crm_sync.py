@@ -14,10 +14,13 @@ def sync_all_users_with_crm():
     """
     Синхронизирует всех клиентов из CRM и обновляет их данные в БД.
     """
-    clients = Client.objects.select_related("user", "branch").exclude(crm_id__isnull=True).exclude(crm_id="")
+    clients = Client.objects.select_related("branch").prefetch_related("users").exclude(crm_id__isnull=True).exclude(crm_id="")
 
     for client in clients:
-        logger.info(f"Синхронизация клиента {client.crm_id} (Пользователь: {client.user.id})")
+        # Получаем всех пользователей, связанных с клиентом
+        user_ids = list(client.users.values_list('id', flat=True))
+        logger.info(f"Синхронизация клиента {client.crm_id} (Пользователи: {user_ids})")
+        
         try:
             crm_response = find_client_by_id(branch_id=client.branch.branch_id, crm_id=client.crm_id)
             logger.info(crm_response)
@@ -38,7 +41,10 @@ def sync_all_users_with_crm():
 
             item = items[0]
             update_client_from_crm(client, item)
-            update_bot_user_status(client.user)
+            
+            # Обновляем статус для всех связанных пользователей
+            for user in client.users.all():
+                update_bot_user_status(user)
 
         except Exception as e:
             logger.exception(f"Ошибка при синхронизации клиента {client.crm_id}: {e}")
