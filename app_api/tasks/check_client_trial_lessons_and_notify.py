@@ -178,14 +178,19 @@ def check_client_passed_trial_lessons():
                 if attended:
                     if user.telegram_id:
                         message = (
-                            "🔔 Пробное занятие посещено\n\n"
-                            f"Ребёнок: {client.name or 'Клиент'}\n"
-                            f"Дата: {(datetime.now() - timedelta(days=1)).strftime('%d.%m.%Y')}\n\n"
-                            "Если всё понравилось, откройте в боте Меню -> RENDERIA меню, чтобы продолжить обучение.\n"
-                            "Ваша RENDERIA!"
+                            "Вчера вы были на пробном занятии в RENDERIA 🚀\n"
+                            "А сегодня ловите ловите гайд по анимации в ROBLOX — оживите персонажей и попробуйте себя в роли разработчика 🔥\n\n"
+                            "До встречи на занятиях в RENDERIA! 🚀"
                         )
+                        
+                        # Создаем инлайн клавиатуру с кнопкой "Получить подарок"
+                        inline_keyboard = [[{
+                            "text": "🎁 Получить подарок",
+                            "url": "https://clixtrac.com/goto/?321635"
+                        }]]
+                        
                         try:
-                            send_telegram_message(user.telegram_id, message)
+                            send_telegram_message_with_inline_keyboard(user.telegram_id, message, inline_keyboard)
                             notification_count += 1
                             logger.info(f"Уведомление о пробном занятии отправлено пользователю {user.telegram_id} (client_id={client.id})")
                         except Exception as e:
@@ -382,3 +387,57 @@ def send_telegram_message(chat_id, text):
 
     logger.info(f"[Telegram] Отправлено сообщение для {chat_id}: {text}")
     pass
+
+
+def send_telegram_message_with_inline_keyboard(chat_id, text, inline_keyboard):
+    """
+    Отправляет сообщение в Telegram с инлайн клавиатурой
+    """
+    token = getattr(settings, "TELEGRAM_BOT_TOKEN", None)
+    if not token:
+        raise ValueError("TELEGRAM_BOT_TOKEN не настроен")
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {
+        "chat_id": chat_id, 
+        "text": text, 
+        "parse_mode": "HTML",
+        "reply_markup": {
+            "inline_keyboard": inline_keyboard
+        }
+    }
+    try:
+        response = requests.post(url, json=payload)
+        if not response.ok:
+            raise Exception(f"Ошибка Telegram API: {response.text}")
+    except Exception as e:
+        logger.error(e)
+
+    logger.info(f"[Telegram] Отправлено сообщение с инлайн кнопкой для {chat_id}: {text}")
+
+
+def send_telegram_document(chat_id, file_path, caption=None):
+    """
+    Отправляет документ в Telegram
+    """
+    token = getattr(settings, "TELEGRAM_BOT_TOKEN", None)
+    if not token:
+        raise ValueError("TELEGRAM_BOT_TOKEN не настроен")
+
+    url = f"https://api.telegram.org/bot{token}/sendDocument"
+    
+    try:
+        with open(file_path, 'rb') as file:
+            files = {'document': file}
+            data = {'chat_id': chat_id}
+            if caption:
+                data['caption'] = caption
+                
+            response = requests.post(url, files=files, data=data)
+            if not response.ok:
+                raise Exception(f"Ошибка Telegram API: {response.text}")
+    except Exception as e:
+        logger.error(f"Ошибка при отправке файла {file_path}: {e}")
+        raise e
+
+    logger.info(f"[Telegram] Отправлен файл {file_path} для {chat_id}")

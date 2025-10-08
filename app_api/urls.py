@@ -18,7 +18,8 @@ from app_api.views import (
     get_partner_categories_view,
     get_partners_by_category_view,
     get_partner_by_id_view, get_manager, get_user_balances, get_client_payment_data, get_user_tg_links,
-    find_client_by_id_view
+    find_client_by_id_view,
+    telegram_callback_handler
 )
 
 app_name = "app_crm_api"
@@ -47,4 +48,5 @@ urlpatterns = [
     path("get_client_payment_data/", get_client_payment_data, name="get_client_payment_data"),
     path("get_user_tg_links/", get_user_tg_links, name="get_user_tg_links"),
     path("find_client_by_id_view/", find_client_by_id_view, name="find_client_by_id_view"),
+    path("telegram_callback/", telegram_callback_handler, name="telegram_callback"),
 ]

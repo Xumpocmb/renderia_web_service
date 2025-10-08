@@ -1149,3 +1149,48 @@ def find_client_by_id_view(request) -> Response:
     except Exception as e:
         logger.exception(f"Ошибка при поиске клиента: {e}")
         return Response({"success": False, "message": f"Внутренняя ошибка сервера: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["POST"])
+def telegram_callback_handler(request) -> Response:
+    """
+    Обработчик callback запросов от Telegram бота для инлайн кнопок
+    """
+    try:
+        callback_query = request.data.get('callback_query')
+        if not callback_query:
+            return Response({"success": False, "message": "Нет callback_query"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        callback_data = callback_query.get('data')
+        chat_id = callback_query.get('from', {}).get('id')
+        
+        if not chat_id:
+            return Response({"success": False, "message": "Нет chat_id"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Обработка callback для получения подарка
+        if callback_data == "get_gift":
+            from app_api.tasks.check_client_trial_lessons_and_notify import send_telegram_document
+            import os
+            from django.conf import settings
+            
+            # Путь к файлу
+            file_path = os.path.join(settings.BASE_DIR, 'static', 'files', 'Roblox_animation_guide.pdf')
+            
+            try:
+                send_telegram_document(
+                    chat_id=chat_id,
+                    file_path=file_path,
+                    caption="🎁 Ваш подарок - гайд по анимации в ROBLOX! Изучайте и создавайте крутые анимации! 🚀"
+                )
+                
+                return Response({"success": True, "message": "Файл отправлен"}, status=status.HTTP_200_OK)
+                
+            except Exception as e:
+                logger.error(f"Ошибка при отправке файла пользователю {chat_id}: {e}")
+                return Response({"success": False, "message": f"Ошибка отправки файла: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        return Response({"success": False, "message": "Неизвестный callback"}, status=status.HTTP_400_BAD_REQUEST)
+        
+    except Exception as e:
+        logger.error(f"Ошибка в telegram_callback_handler: {e}")
+        return Response({"success": False, "message": f"Внутренняя ошибка: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
